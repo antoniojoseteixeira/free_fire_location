@@ -8,7 +8,7 @@ class MapInitial extends MapState {}
 class MapLoading extends MapState {}
 
 class MapSuccess extends MapState {
-  final fireInfo;
+  final MapPageResponse fireInfo;
   MapSuccess({required this.fireInfo});
 }
 

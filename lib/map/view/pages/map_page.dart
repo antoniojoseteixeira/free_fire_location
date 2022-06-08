@@ -7,29 +7,55 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MapCubit, MapState>(builder: ((context, state) {
-      return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.blue),
-        home: Scaffold(
-          body: SafeArea(
-            child: Center(
-                child: SizedBox(
-                    height: double.infinity,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("MAP"),
-                        ElevatedButton(
-                            onPressed: () async {
-                              BlocProvider.of<MapCubit>(context).getMapInfo();
-                            },
-                            child: Text('$state')),
-                      ],
-                    ))),
-          ),
+    return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.blue),
+      home: Scaffold(
+        body: BlocBuilder<MapCubit, MapState>(
+          builder: ((context, state) {
+            if (state is MapLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (state is MapError) {
+              return const Center(
+                child: Text('Error'),
+              );
+            }
+
+            if (state is MapSuccess) {
+              return Center(
+                  child: ListView.builder(
+                itemCount: state.fireInfo.coordinatesList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(state.fireInfo.coordinatesList[index].latitude
+                              .toString()),
+                          Text(state.fireInfo.coordinatesList[index].longitude
+                              .toString()),
+                          Text(state
+                              .fireInfo.coordinatesList[index].satelliteName
+                              .toString()),
+                          Text(state.fireInfo.coordinatesList[index].date
+                              .toString()),
+                        ],
+                      )
+                    ],
+                  );
+                },
+              ));
+            }
+
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
         ),
-      );
-    }));
+      ),
+    );
   }
 }

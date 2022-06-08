@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       home: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => mapCubit),
+          BlocProvider(create: (_) => mapCubit..getMapInfo()),
         ],
         child: const MapPage(),
       ),
