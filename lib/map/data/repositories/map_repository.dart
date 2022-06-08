@@ -14,7 +14,7 @@ class MapRepository {
     String auth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
 
     final uri = Uri.https(baseUrl,
-        "queimadas/users/dados_abertos/focos/10min/${FileName().getFileName()}");
+        "queimadas/users/dados_abertos/focos/10min/${FileName.getFileName()}");
 
     final response = await client.get(
       uri.toString(),

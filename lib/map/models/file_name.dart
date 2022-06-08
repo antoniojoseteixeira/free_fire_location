@@ -1,7 +1,6 @@
 class FileName {
-  final date = DateTime.now().toUtc();
-
-  String getFileName() {
+  static String getFileName() {
+    final date = DateTime.now().toUtc();
     String year = date.year.toString();
     String month = date.month.toString().padLeft(2, '0');
     String day = date.day.toString().padLeft(2, '0');
