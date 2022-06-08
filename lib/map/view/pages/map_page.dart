@@ -33,8 +33,10 @@ class MapPage extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(state.fireInfo.coordinatesList[index].latitude
-                              .toString()),
+                          Text(
+                            state.fireInfo.coordinatesList[index].latitude
+                                .toString(),
+                          ),
                           Text(state.fireInfo.coordinatesList[index].longitude
                               .toString()),
                           Text(state
